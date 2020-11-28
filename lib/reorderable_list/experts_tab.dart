@@ -5,12 +5,12 @@ import 'package:rosseti_web/models/registry_item.dart';
 import 'package:intl/intl.dart';
 import 'widgets/reorderable_list_dish_card.dart';
 
-class ReorderableList extends StatefulWidget {
+class ExpertsTab extends StatefulWidget {
   @override
-  _ReorderableListState createState() => _ReorderableListState();
+  _ExpertsTabState createState() => _ExpertsTabState();
 }
 
-class _ReorderableListState extends State<ReorderableList> {
+class _ExpertsTabState extends State<ExpertsTab> {
   List<DataRow> mapRegistryToDataRows(Registry registry) {
     registry.statements =
         List.generate(100, (index) => RegistryItem.test(index)).toList();
@@ -90,14 +90,11 @@ class _ReorderableListState extends State<ReorderableList> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Рацпредложения',
+                'Эксперты',
                 style: TextStyle(
                   fontSize: 16,
                   color: Color(0xff858585),
                 ),
-              ),
-              SizedBox(
-                height: 25,
               ),
               Expanded(
                 child: SingleChildScrollView(
@@ -107,6 +104,7 @@ class _ReorderableListState extends State<ReorderableList> {
                     child: DataTable(
                       columnSpacing: 20,
                       horizontalMargin: 0,
+                      dividerThickness: 0,
                       showBottomBorder: false,
                       columns: [
                         DataColumn(
