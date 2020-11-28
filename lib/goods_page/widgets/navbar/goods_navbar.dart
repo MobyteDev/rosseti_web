@@ -7,7 +7,12 @@ class Navbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(40),
+      margin: EdgeInsets.only(
+        bottom: 71,
+        right: 40,
+        top: 40,
+        left: 40,
+      ),
       child: LayoutBuilder(
         builder: (context, constraints) {
           if (constraints.maxWidth > 750) {

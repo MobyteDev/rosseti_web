@@ -8,16 +8,6 @@ import 'widgets/titles.dart';
 class GoodsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
-    double _adaptiveHeight(double size) {
-      return height * (size / 1080);
-    }
-
-    double _adaptiveWidth(double size) {
-      return width * (size / 1440);
-    }
-
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       body: Row(
