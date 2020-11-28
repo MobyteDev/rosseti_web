@@ -7,36 +7,27 @@ class Menu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 64,
-      width: 294,
+      width: 400,
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border.all(
           color: Color(0xffF0F0F0),
         ),
-        borderRadius: BorderRadius.circular(6),
+        borderRadius: BorderRadius.circular(10),
       ),
       padding: EdgeInsets.only(
         left: 30,
-        right: 25,
+        right: 11,
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            'Три орешка',
-            style: TextStyle(
-              color: Theme.of(context).textTheme.bodyText1.color,
-              fontSize: 18,
-            ),
+      child: Center(
+        child: Text(
+          'Ответственный за рационализаторскую деятельность Иванов И.И.',
+          textAlign: TextAlign.right,
+          style: TextStyle(
+            color: Theme.of(context).textTheme.bodyText1.color,
+            fontSize: 18,
           ),
-          Container(
-            alignment: Alignment.centerRight,
-            child: Icon(
-              Icons.keyboard_arrow_down,
-              size: 24,
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

@@ -15,7 +15,7 @@ class Navbar extends StatelessWidget {
       ),
       child: LayoutBuilder(
         builder: (context, constraints) {
-          if (constraints.maxWidth > 750) {
+          if (constraints.maxWidth > 850) {
             return Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
