@@ -13,7 +13,7 @@ class ReorderableList extends StatefulWidget {
 class _ReorderableListState extends State<ReorderableList> {
   List<DataRow> mapRegistryToDataRows(Registry registry) {
     registry.statements =
-        List.generate(100, (index) => RegistryItem.test(1)).toList();
+        List.generate(200, (index) => RegistryItem.test(1)).toList();
     return registry.statements
         .map(
           (e) => DataRow(
@@ -33,15 +33,30 @@ class _ReorderableListState extends State<ReorderableList> {
   );
   List<DataCell> mapRegistryItemToDataCeils(RegistryItem item) {
     List<DataCell> list = [];
-    list.add(DataCell(Text(item.id, style: styleValue)));
     list.add(DataCell(
-        Text(DateFormat("dd-MM-yyyy").format(item.date), style: styleValue)));
-    list.add(DataCell(Text(item.title, style: styleValue)));
-    list.add(DataCell(Text(item.currentStateDes, style: styleValue)));
-    list.add(DataCell(Text(item.author.trim(), style: styleValue)));
-    list.add(DataCell(Text(item.author, style: styleValue)));
-    list.add(DataCell(Text(item.ideaStateDes, style: styleValue)));
-    list.add(DataCell(Text(item.status.toString(), style: styleValue)));
+        Container(width: 150, child: Text(item.id, style: styleValue))));
+    list.add(DataCell(Container(
+        width: 130,
+        child:
+            Text(item.status.toString().split('.').last, style: styleValue))));
+    list.add(DataCell(Container(
+        width: 130,
+        child: Text(DateFormat("dd-MM-yyyy").format(item.date),
+            style: styleValue))));
+    list.add(DataCell(Container(
+        width: 200,
+        child: Text(
+          item.title,
+          style: styleValue,
+        ))));
+    list.add(DataCell(Container(
+        width: 200, child: Text(item.currentStateDes, style: styleValue))));
+    list.add(DataCell(Container(
+        width: 130, child: Text(item.author.trim(), style: styleValue))));
+    list.add(DataCell(
+        Container(width: 130, child: Text(item.author, style: styleValue))));
+    list.add(DataCell(Container(
+        width: 200, child: Text(item.ideaStateDes, style: styleValue))));
     return list;
   }
 
@@ -93,12 +108,15 @@ class _ReorderableListState extends State<ReorderableList> {
                         DataColumn(
                             label: SizedBox(
                           child: Text(
-                            "Регистрационный номер предложения",
+                            "Регистрационный номер \nпредложения",
                             style: styleTitle,
                           ),
                         )),
                         DataColumn(
-                            label: Text("Дата регистрации предложения",
+                            label:
+                                Text("Статус предложения", style: styleTitle)),
+                        DataColumn(
+                            label: Text("Дата регистрации \nпредложения",
                                 style: styleTitle)),
                         DataColumn(
                             label: Text("Наименование предложения",
@@ -111,11 +129,8 @@ class _ReorderableListState extends State<ReorderableList> {
                         DataColumn(
                             label: Text("Должность автора", style: styleTitle)),
                         DataColumn(
-                            label: Text("Область применения предложения",
+                            label: Text("Область применения \nпредложения",
                                 style: styleTitle)),
-                        DataColumn(
-                            label:
-                                Text("Статус предложения", style: styleTitle)),
                       ],
                       rows: mapRegistryToDataRows(
                         Registry(),
