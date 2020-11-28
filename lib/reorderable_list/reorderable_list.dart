@@ -1,3 +1,4 @@
+import 'package:bidirectional_scroll_view/bidirectional_scroll_view.dart';
 import 'package:flutter/material.dart';
 import 'package:rosseti_web/models/registry.dart';
 import 'package:rosseti_web/models/registry_item.dart';
@@ -12,7 +13,7 @@ class ReorderableList extends StatefulWidget {
 class _ReorderableListState extends State<ReorderableList> {
   List<DataRow> mapRegistryToDataRows(Registry registry) {
     registry.statements =
-        List.generate(5, (index) => RegistryItem.test(1)).toList();
+        List.generate(100, (index) => RegistryItem.test(1)).toList();
     return registry.statements
         .map(
           (e) => DataRow(
@@ -68,54 +69,52 @@ class _ReorderableListState extends State<ReorderableList> {
               color: Color(0xffF0F0F0),
             ),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Рацпредложения',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Color(0xff858585),
+          //           Text(
+          //   'Рацпредложения',
+          //   style: TextStyle(
+          //     fontSize: 16,
+          //     color: Color(0xff858585),
+          //   ),
+          // ),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: DataTable(
+                columnSpacing: 20,
+                horizontalMargin: 0,
+                dividerThickness: 0,
+                showBottomBorder: false,
+                columns: [
+                  DataColumn(
+                      label: SizedBox(
+                    child: Text(
+                      "Регистрационный номер предложения",
+                      style: styleTitle,
+                    ),
+                  )),
+                  DataColumn(
+                      label: Text("Дата регистрации предложения",
+                          style: styleTitle)),
+                  DataColumn(
+                      label:
+                          Text("Наименование предложения", style: styleTitle)),
+                  DataColumn(
+                      label: Text("Наименование филиала", style: styleTitle)),
+                  DataColumn(label: Text("ФИО Автора(ов)", style: styleTitle)),
+                  DataColumn(
+                      label: Text("Должность автора", style: styleTitle)),
+                  DataColumn(
+                      label: Text("Область применения предложения",
+                          style: styleTitle)),
+                  DataColumn(
+                      label: Text("Статус предложения", style: styleTitle)),
+                ],
+                rows: mapRegistryToDataRows(
+                  Registry(),
                 ),
               ),
-              SingleChildScrollView(
-                child: DataTable(
-                  columnSpacing: 20,
-                  horizontalMargin: 0,
-                  dividerThickness: 0,
-                  showBottomBorder: false,
-                  columns: [
-                    DataColumn(
-                        label: SizedBox(
-                      child: Text(
-                        "Регистрационный номер предложения",
-                        style: styleTitle,
-                      ),
-                    )),
-                    DataColumn(
-                        label: Text("Дата регистрации предложения",
-                            style: styleTitle)),
-                    DataColumn(
-                        label: Text("Наименование предложения",
-                            style: styleTitle)),
-                    DataColumn(
-                        label: Text("Наименование филиала", style: styleTitle)),
-                    DataColumn(
-                        label: Text("ФИО Автора(ов)", style: styleTitle)),
-                    DataColumn(
-                        label: Text("Должность автора", style: styleTitle)),
-                    DataColumn(
-                        label: Text("Область применения предложения",
-                            style: styleTitle)),
-                    DataColumn(
-                        label: Text("Статус предложения", style: styleTitle)),
-                  ],
-                  rows: mapRegistryToDataRows(
-                    Registry(),
-                  ),
-                ),
-              ),
-            ],
+            ),
           )),
     );
   }
