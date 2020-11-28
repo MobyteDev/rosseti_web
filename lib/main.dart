@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         );
         return child;
       },
-      title: 'Appnis Web',
+      title: 'Appniswerwerwer Web',
       theme: ThemeData(
         primaryColor: Color(0xFF98D2F5),
         accentColor: Color(0xFFFFEE94),
