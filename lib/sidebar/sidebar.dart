@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rosseti_web/helpers/tab_manager.dart';
 import 'package:rosseti_web/models/option_item_data.dart';
 import 'package:rosseti_web/responsive_size.dart';
 import '../sidebar_button.dart';
@@ -16,6 +17,18 @@ class _SidebarState extends State<Sidebar> {
     setState(() {
       _selectedIndex = index;
     });
+    switch (_optionItems[_selectedIndex].text) {
+      case "Реестр рацпредложений":
+        TabManager.controller.add(Menu.ratSuggestionTab);
+        break;
+      case "Статистика":
+        TabManager.controller.add(Menu.statisticsTab);
+        break;
+      case "Таблица экспертов":
+        TabManager.controller.add(Menu.expertsTab);
+        break;
+      default:
+    }
   }
 
   @override
