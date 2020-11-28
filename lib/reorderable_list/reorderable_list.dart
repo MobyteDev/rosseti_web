@@ -13,7 +13,7 @@ class ReorderableList extends StatefulWidget {
 class _ReorderableListState extends State<ReorderableList> {
   List<DataRow> mapRegistryToDataRows(Registry registry) {
     registry.statements =
-        List.generate(200, (index) => RegistryItem.test(1)).toList();
+        List.generate(100, (index) => RegistryItem.test(index)).toList();
     return registry.statements
         .map(
           (e) => DataRow(
@@ -31,24 +31,26 @@ class _ReorderableListState extends State<ReorderableList> {
     color: Color(0xffB355AB),
     fontSize: 12,
   );
+
   List<DataCell> mapRegistryItemToDataCeils(RegistryItem item) {
     List<DataCell> list = [];
     list.add(DataCell(
         Container(width: 150, child: Text(item.id, style: styleValue))));
-    list.add(DataCell(Container(
-        width: 130,
-        child:
-            Text(item.status.toString().split('.').last, style: styleValue))));
+    list.add(DataCell(
+      DropAwesomeDownButton(item),
+      onTap: () {},
+    ));
     list.add(DataCell(Container(
         width: 130,
         child: Text(DateFormat("dd-MM-yyyy").format(item.date),
             style: styleValue))));
+    list.add(DataCell(
+        Container(width: 200, child: Text(item.title, style: styleValue))));
     list.add(DataCell(Container(
-        width: 200,
-        child: Text(
-          item.title,
-          style: styleValue,
-        ))));
+        width: 100,
+        child: Text(item.popularity.toString(), style: styleValue))));
+    list.add(DataCell(Container(
+        width: 100, child: Text(item.uniq.toString(), style: styleValue))));
     list.add(DataCell(Container(
         width: 200, child: Text(item.currentStateDes, style: styleValue))));
     list.add(DataCell(Container(
@@ -122,6 +124,10 @@ class _ReorderableListState extends State<ReorderableList> {
                             label: Text("Наименование предложения",
                                 style: styleTitle)),
                         DataColumn(
+                            label: Text("Популярность", style: styleTitle)),
+                        DataColumn(
+                            label: Text("Уникальность", style: styleTitle)),
+                        DataColumn(
                             label: Text("Наименование филиала",
                                 style: styleTitle)),
                         DataColumn(
@@ -141,6 +147,58 @@ class _ReorderableListState extends State<ReorderableList> {
               ),
             ],
           )),
+    );
+  }
+}
+
+class DropAwesomeDownButton extends StatefulWidget {
+  RegistryItem item;
+  DropAwesomeDownButton(this.item);
+  @override
+  _DropAwesomeDownButtonState createState() => _DropAwesomeDownButtonState();
+}
+
+class _DropAwesomeDownButtonState extends State<DropAwesomeDownButton> {
+  Status currentItem;
+  List<DropdownMenuItem<Status>> dropDownItems;
+  @override
+  void initState() {
+    currentItem = widget.item.status;
+    dropDownItems = Status.values
+        .map(
+          (e) => DropdownMenuItem(
+            value: e,
+            child: Text(e.asString),
+          ),
+        )
+        .toList();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 180,
+      child: DropdownButton(
+        icon: Icon(
+          Icons.expand_more_rounded,
+          color: Color(0xFFBEBEBE),
+        ),
+        underline: Container(),
+        value: currentItem,
+        style: TextStyle(
+          fontSize: 12,
+          color: Color(0xff858585),
+        ),
+        onChanged: (item) {
+          setState(() {
+            currentItem = item;
+          });
+          setState(() {});
+          print(currentItem);
+        },
+        items: dropDownItems,
+      ),
     );
   }
 }
