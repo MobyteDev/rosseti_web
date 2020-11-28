@@ -8,35 +8,24 @@ class ReorderableList extends StatefulWidget {
 }
 
 class _ReorderableListState extends State<ReorderableList> {
-  List<ReorderableListDishCard> _listOfDishes = [
-    ReorderableListDishCard(),
-    ReorderableListDishCard(),
-    ReorderableListDishCard(),
-    ReorderableListDishCard(),
-    ReorderableListDishCard(),
-    ReorderableListDishCard(),
-    ReorderableListDishCard(),
-    ReorderableListDishCard(),
-    ReorderableListDishCard(),
-    ReorderableListDishCard(),
-    ReorderableListDishCard(),
-    ReorderableListDishCard(),
-  ];
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ReorderableListView(
-        onReorder: (
-          int oldIndex,
-          int newIndex,
-        ) {},
-        children: [
-          for (final item in _listOfDishes)
-            ReorderableListDishCard(
-              key: ValueKey(item),
-            )
-        ],
+    return Expanded(
+      child: Container(
+        margin: EdgeInsets.only(
+          bottom: 88,
+          left: 34,
+          right: 40,
+        ),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(
+            10,
+          ),
+          border: Border.all(
+            color: Color(0xffF0F0F0),
+          ),
+        ),
       ),
     );
   }

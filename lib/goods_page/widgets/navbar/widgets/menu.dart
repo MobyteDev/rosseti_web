@@ -10,6 +10,9 @@ class Menu extends StatelessWidget {
       width: 294,
       decoration: BoxDecoration(
         color: Colors.white,
+        border: Border.all(
+          color: Color(0xffF0F0F0),
+        ),
         borderRadius: BorderRadius.circular(6),
       ),
       padding: EdgeInsets.only(

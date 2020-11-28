@@ -56,36 +56,42 @@ class _SidebarState extends State<Sidebar> {
             items: _optionItems,
           ),
           Spacer(),
-          Container(
-            margin: EdgeInsets.only(bottom: 21.height),
-            alignment: Alignment.center,
-            padding: EdgeInsets.only(left: 21),
-            width: 263,
-            height: 64,
-            decoration: BoxDecoration(
-              color: Color(0xFFF7FAFD),
-              borderRadius: BorderRadius.circular(6),
-            ),
-            child: Row(
-              children: [
-                Icon(
-                  Icons.check,
-                  color: Theme.of(context).primaryColor,
-                  size: 20,
-                ),
-                SizedBox(
-                  width: 31.width,
-                ),
-                Text(
-                  "Выйти",
-                  style: TextStyle(
-                    fontFamily:
-                        Theme.of(context).textTheme.bodyText1.fontFamily,
-                    color: Theme.of(context).textTheme.bodyText1.color,
-                    fontSize: 18,
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Container(
+              width: 263,
+              margin: EdgeInsets.only(
+                bottom: 24,
+              ),
+              height: 64,
+              decoration: BoxDecoration(
+                color: Color(0xFFF7FAFD),
+                borderRadius: BorderRadius.circular(6),
+              ),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 21,
                   ),
-                ),
-              ],
+                  Icon(
+                    Icons.exit_to_app_rounded,
+                    color: Color(0xff005B9C),
+                    size: 24,
+                  ),
+                  SizedBox(
+                    width: 28,
+                  ),
+                  Text(
+                    "Выйти",
+                    style: TextStyle(
+                      fontFamily:
+                          Theme.of(context).textTheme.bodyText1.fontFamily,
+                      color: Theme.of(context).textTheme.bodyText1.color,
+                      fontSize: 18,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],
