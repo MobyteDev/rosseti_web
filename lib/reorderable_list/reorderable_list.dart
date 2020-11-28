@@ -38,7 +38,7 @@ class _ReorderableListState extends State<ReorderableList> {
         Text(DateFormat("dd-MM-yyyy").format(item.date), style: styleValue)));
     list.add(DataCell(Text(item.title, style: styleValue)));
     list.add(DataCell(Text(item.currentStateDes, style: styleValue)));
-    list.add(DataCell(Text(item.author, style: styleValue)));
+    list.add(DataCell(Text(item.author.trim(), style: styleValue)));
     list.add(DataCell(Text(item.author, style: styleValue)));
     list.add(DataCell(Text(item.ideaStateDes, style: styleValue)));
     list.add(DataCell(Text(item.status.toString(), style: styleValue)));
@@ -69,52 +69,62 @@ class _ReorderableListState extends State<ReorderableList> {
               color: Color(0xffF0F0F0),
             ),
           ),
-          //           Text(
-          //   'Рацпредложения',
-          //   style: TextStyle(
-          //     fontSize: 16,
-          //     color: Color(0xff858585),
-          //   ),
-          // ),
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: DataTable(
-                columnSpacing: 20,
-                horizontalMargin: 0,
-                dividerThickness: 0,
-                showBottomBorder: false,
-                columns: [
-                  DataColumn(
-                      label: SizedBox(
-                    child: Text(
-                      "Регистрационный номер предложения",
-                      style: styleTitle,
-                    ),
-                  )),
-                  DataColumn(
-                      label: Text("Дата регистрации предложения",
-                          style: styleTitle)),
-                  DataColumn(
-                      label:
-                          Text("Наименование предложения", style: styleTitle)),
-                  DataColumn(
-                      label: Text("Наименование филиала", style: styleTitle)),
-                  DataColumn(label: Text("ФИО Автора(ов)", style: styleTitle)),
-                  DataColumn(
-                      label: Text("Должность автора", style: styleTitle)),
-                  DataColumn(
-                      label: Text("Область применения предложения",
-                          style: styleTitle)),
-                  DataColumn(
-                      label: Text("Статус предложения", style: styleTitle)),
-                ],
-                rows: mapRegistryToDataRows(
-                  Registry(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Рацпредложения',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Color(0xff858585),
                 ),
               ),
-            ),
+              Expanded(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: DataTable(
+                      columnSpacing: 20,
+                      horizontalMargin: 0,
+                      dividerThickness: 0,
+                      showBottomBorder: false,
+                      columns: [
+                        DataColumn(
+                            label: SizedBox(
+                          child: Text(
+                            "Регистрационный номер предложения",
+                            style: styleTitle,
+                          ),
+                        )),
+                        DataColumn(
+                            label: Text("Дата регистрации предложения",
+                                style: styleTitle)),
+                        DataColumn(
+                            label: Text("Наименование предложения",
+                                style: styleTitle)),
+                        DataColumn(
+                            label: Text("Наименование филиала",
+                                style: styleTitle)),
+                        DataColumn(
+                            label: Text("ФИО Автора(ов)", style: styleTitle)),
+                        DataColumn(
+                            label: Text("Должность автора", style: styleTitle)),
+                        DataColumn(
+                            label: Text("Область применения предложения",
+                                style: styleTitle)),
+                        DataColumn(
+                            label:
+                                Text("Статус предложения", style: styleTitle)),
+                      ],
+                      rows: mapRegistryToDataRows(
+                        Registry(),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           )),
     );
   }
