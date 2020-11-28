@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rosseti_web/reorderable_list/reorderable_list.dart';
 import 'package:rosseti_web/sidebar/sidebar.dart';
+import 'package:rosseti_web/statistic_page/statistic_page.dart';
 import 'widgets/navbar/goods_navbar.dart';
 
 class GoodsPage extends StatelessWidget {
@@ -16,7 +17,7 @@ class GoodsPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Navbar(),
-                ReorderableList(),
+                StatisticPage(),
               ],
             ),
           ),
