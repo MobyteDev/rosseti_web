@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:rosseti_web/models/application.dart';
+import 'package:rosseti_web/models/applications.dart';
 
 class RestManager {
   static String _user_token;
@@ -35,7 +37,7 @@ class RestManager {
     }
   }
 
-  static void getApplications() async {
+  static Future<List<Application>> getApplications() async {
     var res = await http.get("http://178.154.255.209:3333/applications",
         headers: {
           'Content-Type': 'applications/json',
@@ -44,7 +46,7 @@ class RestManager {
     if (res.statusCode == 200) {
       print("getApplications success");
       var json = jsonDecode(res.body) as Map<String, dynamic>;
-      //var List<Application> applica
+      return Applications.fromJson(json).applications;
     }
   }
 }
