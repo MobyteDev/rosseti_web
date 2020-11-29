@@ -1,6 +1,10 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:rosseti_web/models/application.dart';
+import 'package:rosseti_web/models/applications.dart';
+import 'package:rosseti_web/models/registry.dart';
+import 'package:rosseti_web/models/registry_item.dart';
 
 class RestManager {
   static String _user_token;
@@ -19,6 +23,9 @@ class RestManager {
       print("_auth success");
       _user_token =
           (jsonDecode(res.body) as Map<String, dynamic>)["jwt"].toString();
+      print(_user_token);
+    } else {
+      print('ploxo');
     }
   }
 
@@ -35,16 +42,22 @@ class RestManager {
     }
   }
 
-  static void getApplications() async {
+  static Future<Registry> getRegistry() async {
+    print(1);
+    print(_user_token);
     var res = await http.get("http://178.154.255.209:3333/applications",
         headers: {
-          'Content-Type': 'applications/json',
+          'Content-Type': 'application/json',
           'Authorization': 'Bearer ${_user_token}'
         });
     if (res.statusCode == 200) {
       print("getApplications success");
-      var json = jsonDecode(res.body) as Map<String, dynamic>;
-      //var List<Application> applica
+      Registry registry = Registry()
+        ..statements = (jsonDecode(res.body) as List<dynamic>)
+            .map((e) => RegistryItem.fromjson(e))
+            .toList();
+      print(registry.statements.length);
+      return registry;
     }
   }
 }

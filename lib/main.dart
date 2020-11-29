@@ -20,7 +20,6 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     TabManager.init();
-    RestManager.init();
   }
 
   @override

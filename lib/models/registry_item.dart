@@ -5,54 +5,15 @@ import 'package:flutter/material.dart';
 
 class RegistryItem {
   final String id;
-  final String chatID;
   final String currentStateDes;
   final DateTime date;
   final String author; //TODO user
   final String title;
-  final int numberAccepted;
-  final Direction direction;
-  final Region region;
   final Status status;
-  final String predictedStateDes;
   final String ideaStateDes;
-  final bool isLiked;
   final int uniq;
   final int popularity;
 
-  factory RegistryItem.test(int status) {
-    Random rand = Random(status);
-    var name = "Киров И.А";
-    var date = DateTime(2020);
-    var title =
-        "В Курске можно открыть первый Межрегиональный центр управления сетями";
-    var numberAccepted = rand.nextInt(1000);
-    var uniqueness = rand.nextInt(100);
-
-    var popularity = rand.nextInt(100);
-
-    Status statusType = Status.values[status % 4];
-    var id = rand.nextInt(100);
-    var reg = Region.values[status % 3];
-    var dir = Direction.values[status % 3 + 1];
-    return RegistryItem(
-      id.toString(),
-      date,
-      name,
-      title,
-      numberAccepted,
-      dir,
-      reg,
-      statusType,
-      "",
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ornare ullamcorper augue id elit etiam dignissim suspendisse neque. Amet, vitae gravida faucibus imperdiet vel in fermentum sit. Nullam venenatis, venenatis justo, ultrices sed faucibus et duis ullamcorper. Sed tortor odio enim non etiam molestie sit at. Orci, egestas magna magnis eleifend elit. Dictum turpis mattis aenean tempus adipiscing tincidunt augue a. Tellus massaNibh id auccasator pharetra sit morbi est quis.",
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ornare ullamcorper augue id elit etiam dignissim suspendisse neque. Amet, vitae gravida faucibus imperdiet vel in fermentum sit. Nullam venenatis, venenatis justo, ultrices sed faucibus et duis ullamcorper. Sed tortor odio enim non etiam molestie sit at. Orci, egestas magna magnis eleifend elit. Dictum turpis mattis aenean tempus adipiscing tincidunt augue a. Tellus massaNibh id auccasator pharetra sit morbi est quis.",
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ornare ullamcorper augue id elit etiam dignissim suspendisse neque. Amet, vitae gravida faucibus imperdiet vel in fermentum sit. Nullam venenatis, venenatis justo, ultrices sed faucibus et duis ullamcorper. Sed tortor odio enim non etiam molestie sit at. Orci, egestas magna magnis eleifend elit. Dictum turpis mattis aenean tempus adipiscing tincidunt augue a. Tellus massaNibh id auccasator pharetra sit morbi est quis.",
-      false,
-      popularity,
-      uniqueness,
-    );
-  }
   String get dateString => (date.day.toString() +
       "." +
       date.month.toString() +
@@ -64,18 +25,26 @@ class RegistryItem {
     this.date,
     this.author,
     this.title,
-    this.numberAccepted,
-    this.direction,
-    this.region,
     this.status,
-    this.chatID,
     this.currentStateDes,
-    this.predictedStateDes,
     this.ideaStateDes,
-    this.isLiked,
     this.uniq,
     this.popularity,
   );
+
+  static fromjson(Map<String, dynamic> json) {
+    return RegistryItem(
+      json['id'],
+      DateTime.parse(json['created_at']),
+      (json["other_authors"] as List<dynamic>).first,
+      json['title'] as String,
+      Status.values[json['status'] as int],
+      json['problem'] as String,
+      json['decision'] as String,
+      json["uniqueness"] as int,
+      json["popularity"] as int,
+    );
+  }
 }
 
 enum CurrentOrder {

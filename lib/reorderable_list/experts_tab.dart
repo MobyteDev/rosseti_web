@@ -10,18 +10,6 @@ class ExpertsTab extends StatefulWidget {
 }
 
 class _ExpertsTabState extends State<ExpertsTab> {
-  List<DataRow> mapRegistryToDataRows(Registry registry) {
-    registry.statements =
-        List.generate(100, (index) => RegistryItem.test(index)).toList();
-    return registry.statements
-        .map(
-          (e) => DataRow(
-            cells: mapRegistryItemToDataCeils(e),
-          ),
-        )
-        .toList();
-  }
-
   TextStyle styleValue = TextStyle(
     fontSize: 12,
     color: Color(0xff858585),
