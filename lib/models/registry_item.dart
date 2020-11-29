@@ -2,12 +2,13 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:rosseti_web/models/profile.dart';
 
 class RegistryItem {
-  final String id;
+  final int id;
   final String currentStateDes;
   final DateTime date;
-  final String author; //TODO user
+  final Profile author; //TODO user
   final String title;
   final Status status;
   final String ideaStateDes;
@@ -34,9 +35,9 @@ class RegistryItem {
 
   static fromjson(Map<String, dynamic> json) {
     return RegistryItem(
-      json['id'],
+      json['id'] as int,
       DateTime.parse(json['created_at']),
-      (json["other_authors"] as List<dynamic>).first,
+      Profile.test(),
       json['title'] as String,
       Status.values[json['status'] as int],
       json['problem'] as String,
@@ -100,8 +101,9 @@ extension asStrReg on Region {
 }
 
 enum Status {
+  denied,
   moderation,
-  expertise,
+  revision,
   accepted,
   implantation,
 }
@@ -109,9 +111,11 @@ enum Status {
 extension asStrStat on Status {
   String get asString {
     switch (this) {
+      case Status.denied:
+        return "Отклонено";
       case Status.moderation:
         return "На модерации";
-      case Status.expertise:
+      case Status.revision:
         return "На экспертизе";
       case Status.accepted:
         return "Принято";
@@ -124,9 +128,11 @@ extension asStrStat on Status {
 
   Color get asColor {
     switch (this) {
+      case Status.denied:
+        return Colors.red;
       case Status.moderation:
         return Colors.orange;
-      case Status.expertise:
+      case Status.revision:
         return Color(0xFFF1D43D);
       case Status.accepted:
         return Color(0xFF70B64F);

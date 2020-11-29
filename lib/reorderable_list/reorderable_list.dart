@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rosseti_web/helpers/rest_manager.dart';
 import 'package:rosseti_web/models/registry.dart';
 import 'package:rosseti_web/models/registry_item.dart';
 import 'package:intl/intl.dart';
@@ -36,8 +37,8 @@ class _ReorderableListState extends State<ReorderableList> {
 
   List<DataCell> mapRegistryItemToDataCeils(RegistryItem item) {
     List<DataCell> list = [];
-    list.add(DataCell(
-        Container(width: 150, child: Text(item.id, style: styleValue))));
+    list.add(DataCell(Container(
+        width: 150, child: Text(item.id.toString(), style: styleValue))));
     list.add(DataCell(
       DropAwesomeDownButton(item),
       onTap: () {},
@@ -56,9 +57,9 @@ class _ReorderableListState extends State<ReorderableList> {
     list.add(DataCell(Container(
         width: 200, child: Text(item.currentStateDes, style: styleValue))));
     list.add(DataCell(Container(
-        width: 130, child: Text(item.author.trim(), style: styleValue))));
-    list.add(DataCell(
-        Container(width: 130, child: Text(item.author, style: styleValue))));
+        width: 130, child: Text(item.author.name, style: styleValue))));
+    list.add(DataCell(Container(
+        width: 130, child: Text(item.author.name, style: styleValue))));
     list.add(DataCell(Container(
         width: 130,
         child: Text(Random().nextBool() ? "0 р" : "50 000 р",
@@ -110,9 +111,7 @@ class _ReorderableListState extends State<ReorderableList> {
                 child: BlocBuilder<StatsBlocBloc, StatsBlocState>(
                   builder: (context, state) {
                     if (state is StatsBlocInitial) {
-                      return Expanded(
-                        child: CircularProgressIndicator(),
-                      );
+                      return CircularProgressIndicator();
                     }
                     if (state is LoadedSuccecful) {
                       return Expanded(
@@ -220,12 +219,23 @@ class _DropAwesomeDownButtonState extends State<DropAwesomeDownButton> {
           fontSize: 12,
           color: Color(0xff858585),
         ),
-        onChanged: (item) {
+        onChanged: (item) async {
           setState(() {
             currentItem = item;
           });
-          setState(() {});
-          print(currentItem);
+          int st = 0;
+          if (item == Status.accepted) {
+            st = 0;
+          } else if (item == Status.denied) {
+            st = 1;
+          } else if (item == Status.implantation) {
+            st = 2;
+          } else if (item == Status.moderation) {
+            st = 3;
+          } else {
+            st = 4;
+          }
+          await RestManager.updateStatus(widget.item.id, st);
         },
         items: dropDownItems,
       ),

@@ -7,5 +7,5 @@ class StatsBlocInitial extends StatsBlocState {}
 
 class LoadedSuccecful extends StatsBlocState {
   Registry registry;
-  LoadedSuccecful(registry);
+  LoadedSuccecful(this.registry);
 }

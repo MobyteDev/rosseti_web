@@ -16,7 +16,7 @@ class StatsBlocBloc extends Bloc<StatsBlocEvent, StatsBlocState> {
     StatsBlocEvent event,
   ) async* {
     if (event is DownloadData) {
-      await RestManager.init();
+      await RestManager.auth();
       Registry result = await RestManager.getRegistry();
       print(result.statements.length);
       yield LoadedSuccecful(result);

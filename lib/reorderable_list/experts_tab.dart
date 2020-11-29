@@ -21,8 +21,8 @@ class _ExpertsTabState extends State<ExpertsTab> {
 
   List<DataCell> mapRegistryItemToDataCeils(RegistryItem item) {
     List<DataCell> list = [];
-    list.add(DataCell(
-        Container(width: 150, child: Text(item.id, style: styleValue))));
+    list.add(DataCell(Container(
+        width: 150, child: Text(item.id.toString(), style: styleValue))));
     list.add(DataCell(
       DropAwesomeDownButton(item),
       onTap: () {},
@@ -40,9 +40,9 @@ class _ExpertsTabState extends State<ExpertsTab> {
     list.add(DataCell(Container(
         width: 200, child: Text(item.currentStateDes, style: styleValue))));
     list.add(DataCell(Container(
-        width: 130, child: Text(item.author.trim(), style: styleValue))));
-    list.add(DataCell(
-        Container(width: 130, child: Text(item.author, style: styleValue))));
+        width: 130, child: Text(item.author.name, style: styleValue))));
+    list.add(DataCell(Container(
+        width: 130, child: Text(item.author.name, style: styleValue))));
     list.add(DataCell(Container(
         width: 200, child: Text(item.ideaStateDes, style: styleValue))));
     return list;
