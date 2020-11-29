@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rosseti_web/helpers/rest_manager.dart';
 
 import 'goods_page/goods_page.dart';
 import 'helpers/tab_manager.dart';
@@ -19,6 +20,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     TabManager.init();
+    RestManager.init();
   }
 
   @override
