@@ -224,13 +224,13 @@ class _DropAwesomeDownButtonState extends State<DropAwesomeDownButton> {
             currentItem = item;
           });
           int st = 0;
-          if (item == Status.accepted) {
+          if (item == Status.denied) {
             st = 0;
-          } else if (item == Status.denied) {
-            st = 1;
-          } else if (item == Status.implantation) {
-            st = 2;
           } else if (item == Status.moderation) {
+            st = 1;
+          } else if (item == Status.revision) {
+            st = 2;
+          } else if (item == Status.accepted) {
             st = 3;
           } else {
             st = 4;
