@@ -1,14 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rosseti_web/helpers/rest_manager.dart';
 
 import 'goods_page/goods_page.dart';
+import 'helpers/tab_manager.dart';
 import 'responsive_size.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    TabManager.init();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
