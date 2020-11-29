@@ -1,4 +1,3 @@
-import 'package:bidirectional_scroll_view/bidirectional_scroll_view.dart';
 import 'package:flutter/material.dart';
 import 'package:rosseti_web/models/registry.dart';
 import 'package:rosseti_web/models/registry_item.dart';
