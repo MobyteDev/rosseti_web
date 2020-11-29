@@ -24,7 +24,7 @@ class GoodsPage extends StatelessWidget {
                   builder: (context, snapshot) {
                     switch (snapshot.data) {
                       case Menu.ratSuggestionTab:
-                        return StatisticPage();
+                        return ReorderableList();
                         break;
                       case Menu.statisticsTab:
                         return StatisticPage();

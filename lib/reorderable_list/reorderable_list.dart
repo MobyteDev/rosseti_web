@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:rosseti_web/models/registry.dart';
 import 'package:rosseti_web/models/registry_item.dart';
@@ -56,6 +58,10 @@ class _ReorderableListState extends State<ReorderableList> {
         width: 130, child: Text(item.author.trim(), style: styleValue))));
     list.add(DataCell(
         Container(width: 130, child: Text(item.author, style: styleValue))));
+    list.add(DataCell(Container(
+        width: 130,
+        child: Text(Random().nextBool() ? "0 р" : "50 000 р",
+            style: styleValue))));
     list.add(DataCell(Container(
         width: 200, child: Text(item.ideaStateDes, style: styleValue))));
     return list;
@@ -135,6 +141,9 @@ class _ReorderableListState extends State<ReorderableList> {
                             label: Text("ФИО Автора(ов)", style: styleTitle)),
                         DataColumn(
                             label: Text("Должность автора", style: styleTitle)),
+                        DataColumn(
+                            label: Text("Выплачено вознагруждения",
+                                style: styleTitle)),
                         DataColumn(
                             label: Text("Область применения \nпредложения",
                                 style: styleTitle)),
